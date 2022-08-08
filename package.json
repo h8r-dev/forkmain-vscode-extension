@@ -43,7 +43,7 @@
   "contributes": {
     "configuration": [
       {
-        "title": "ForkMain",
+        "title": "Forkmain",
         "properties": {
           "forkmain.checkNhctlVersion": {
             "type": "string",
@@ -67,27 +67,27 @@
       "activitybar": [
         {
           "icon": "images/forkmain-logo.png",
-          "id": "ForkMainView",
-          "title": "ForkMain"
+          "id": "ForkmainView",
+          "title": "Forkmain"
         }
       ]
     },
     "views": {
       "explorer": [
         {
-          "id": "ForkMainSyncManage",
-          "name": "ForkMain Sync Manage"
+          "id": "ForkmainSyncManage",
+          "name": "Forkmain Sync Manage"
         }
       ],
-      "ForkMainView": [
+      "ForkmainView": [
         {
-          "id": "ForkMainK8STree",
-          "name": "ForkMainK8STree",
+          "id": "ForkmainK8STree",
+          "name": "ForkmainK8STree",
           "type": "tree",
           "when": "!extensionActivated"
         },
         {
-          "id": "ForkMain.Home",
+          "id": "Forkmain.Home",
           "name": "",
           "type": "webview",
           "when": "extensionActivated"
@@ -96,17 +96,17 @@
     },
     "viewsWelcome": [
       {
-        "view": "ForkMainK8STree",
+        "view": "ForkmainK8STree",
         "contents": "%noReady.description%",
         "when": "!nhctl.upgrade && !extensionActivated"
       },
       {
-        "view": "ForkMainK8STree",
+        "view": "ForkmainK8STree",
         "contents": "%noApps.description%",
         "when": "extensionActivated && emptyCluster"
       },
       {
-        "view": "ForkMainK8STree",
+        "view": "ForkmainK8STree",
         "contents": "%tips.nhctl.updating%",
         "when": "nhctl.upgrade"
       }

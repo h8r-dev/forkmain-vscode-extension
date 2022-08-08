@@ -15,7 +15,7 @@ export default class LocateWorkNodeCommand {
   ) {
     context.subscriptions.push(
       vscode.commands.registerCommand(
-        "Nocalhost.LocateWorkNode",
+        "Forkmain.LocateWorkNode",
         this.getResourceNode.bind(this)
       )
     );

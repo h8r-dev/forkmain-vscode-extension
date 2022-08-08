@@ -89,7 +89,7 @@ class State {
     const refresh = async () => {
       const { token } = action;
       try {
-        const rootNode = this.getNode("ForkMainK8STree") as BaseNocalhostNode;
+        const rootNode = this.getNode("ForkmainK8STree") as BaseNocalhostNode;
         if (rootNode) {
           await rootNode.updateData(null, token).catch(() => {});
         }
