@@ -11,6 +11,6 @@ export default class ClustersView implements ICommand {
   }
 
   async execCommand() {
-    vscode.commands.executeCommand("setContext", "Nocalhost.visibleTree", true);
+    vscode.commands.executeCommand("setContext", "Forkmain.visibleTree", true);
   }
 }

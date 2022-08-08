@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema#",
-  "title": "Nocalhost config schema",
+  "title": "ForkMain config schema",
   "type": "object",
   "properties": {
     "configProperties": {

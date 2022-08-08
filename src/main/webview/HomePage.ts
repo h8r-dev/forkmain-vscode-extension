@@ -29,7 +29,7 @@ import { getStoredToken, getStoredApplicationData } from "../account";
 import { BaseNocalhostNode } from "../nodes/types/nodeType";
 
 export class HomeWebViewProvider implements vscode.WebviewViewProvider {
-  public static readonly viewType = "Nocalhost.Home";
+  public static readonly viewType = "ForkMain.Home";
   private locateWorkNodeSrvice: LocateWorkNodeService;
   private currentWorkNode: BaseNocalhostNode = null;
 

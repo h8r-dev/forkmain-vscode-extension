@@ -549,7 +549,7 @@ export default class StartDevModeCommand implements ICommand {
       if (parent && parent.updateData) {
         await parent.updateData(true);
       }
-      await vscode.commands.executeCommand("Nocalhost.refresh", parent);
+      await vscode.commands.executeCommand("Forkmain.refresh", parent);
 
       const terminal = await nhctl.devTerminal(
         node.getAppName(),

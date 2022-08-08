@@ -23,7 +23,7 @@ class State {
     await asyncLimit(this.queueRender.splice(0), (key) => {
       return new Promise((res) => {
         vscode.commands
-          .executeCommand("Nocalhost.refresh", this.getNode(key))
+          .executeCommand("Forkmain.refresh", this.getNode(key))
           .then(res);
       });
     });
@@ -89,7 +89,7 @@ class State {
     const refresh = async () => {
       const { token } = action;
       try {
-        const rootNode = this.getNode("Nocalhost") as BaseNocalhostNode;
+        const rootNode = this.getNode("ForkMainK8STree") as BaseNocalhostNode;
         if (rootNode) {
           await rootNode.updateData(null, token).catch(() => {});
         }
@@ -165,10 +165,10 @@ class State {
 
     await vscode.commands.executeCommand(
       "setContext",
-      "Nocalhost.visibleTree",
+      "Forkmain.visibleTree",
       isExist
     );
-    await vscode.commands.executeCommand("Nocalhost.refresh");
+    await vscode.commands.executeCommand("Forkmain.refresh");
 
     this.startAutoRefresh(force);
   }
@@ -184,7 +184,7 @@ class State {
   delete(key: string, args?: { refresh: boolean; node?: BaseNocalhostNode }) {
     this.stateMap.delete(key);
     if (args && args.refresh) {
-      vscode.commands.executeCommand("Nocalhost.refresh", args.node);
+      vscode.commands.executeCommand("Forkmain.refresh", args.node);
     }
   }
 
@@ -195,7 +195,7 @@ class State {
   ) {
     this.stateMap.set(key, value);
     if (args && args.refresh) {
-      vscode.commands.executeCommand("Nocalhost.refresh", args.node);
+      vscode.commands.executeCommand("Forkmain.refresh", args.node);
     }
   }
 
@@ -218,7 +218,7 @@ class State {
     appMap.set(key, value);
     if (args && args.refresh) {
       await vscode.commands.executeCommand(
-        "Nocalhost.refresh",
+        "Forkmain.refresh",
         this.getNode(args.nodeStateId)
       );
     }
@@ -239,7 +239,7 @@ class State {
     appMap.delete(key);
     if (args && args.refresh) {
       await vscode.commands.executeCommand(
-        "Nocalhost.refresh",
+        "Forkmain.refresh",
         this.getNode(args.nodeStateId)
       );
     }

@@ -32,7 +32,7 @@ interface IWebviewOpenProps {
 }
 
 export default class NocalhostWebviewPanel {
-  public static readonly viewType: string = "nocalhostWebview";
+  public static readonly viewType: string = "ForkMainWebview";
   public static currentPanel: NocalhostWebviewPanel | null = null;
   private static id: number = 0;
   private static readonly panels: Map<number, NocalhostWebviewPanel> =

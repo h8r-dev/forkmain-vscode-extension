@@ -52,7 +52,7 @@ export default class UninstallCommand implements ICommand {
     ).finally(async () => {
       state.delete(appNode.getNodeStateId());
       await devSpace.updateData();
-      await vscode.commands.executeCommand("Nocalhost.refresh", devSpace);
+      await vscode.commands.executeCommand("Forkmain.refresh", devSpace);
       await state.startAutoRefresh();
     });
   }

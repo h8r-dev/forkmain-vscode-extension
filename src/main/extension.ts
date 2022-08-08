@@ -180,7 +180,7 @@ export async function activate(context: vscode.ExtensionContext) {
   };
 
   let nocalhostFileSystemProvider = new NocalhostFileSystemProvider();
-  appTreeView = vscode.window.createTreeView("Nocalhost", {
+  appTreeView = vscode.window.createTreeView("ForkMainK8STree", {
     treeDataProvider: appTreeProvider,
   });
 

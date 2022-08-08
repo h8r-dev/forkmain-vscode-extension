@@ -293,7 +293,7 @@ export default class InstallAppSourceCommand implements ICommand {
     }
 
     await appNode.updateData();
-    await vscode.commands.executeCommand("Nocalhost.refresh", appNode);
+    await vscode.commands.executeCommand("Forkmain.refresh", appNode);
 
     const applicationInfo = appNode.buildApplicationInfo(appName, {
       applicationUrl,

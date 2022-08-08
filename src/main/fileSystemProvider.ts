@@ -41,9 +41,8 @@ export default class NocalhostFileSystemProvider implements FileSystemProvider {
   static supportScheme = ["Nocalhost", "NocalhostRW"];
   static supportAuthority = ["k8s", "nh"];
   public dataMap: Map<Uri, Uint8Array> = new Map();
-  private readonly onDidChangeFileEmitter: EventEmitter<
-    FileChangeEvent[]
-  > = new EventEmitter<FileChangeEvent[]>();
+  private readonly onDidChangeFileEmitter: EventEmitter<FileChangeEvent[]> =
+    new EventEmitter<FileChangeEvent[]>();
   onDidChangeFile: Event<FileChangeEvent[]> = this.onDidChangeFileEmitter.event;
   watch(
     uri: Uri,
@@ -300,7 +299,7 @@ export default class NocalhostFileSystemProvider implements FileSystemProvider {
             subKey,
             workloadType
           );
-          command = "Nocalhost.refresh";
+          command = "Forkmain.refresh";
           commands.executeCommand(command, state.getNode(id));
           return;
         }

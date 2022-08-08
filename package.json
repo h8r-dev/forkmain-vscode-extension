@@ -45,14 +45,14 @@
       {
         "title": "ForkMain",
         "properties": {
-          "nocalhost.checkNhctlVersion": {
+          "forkmain.checkNhctlVersion": {
             "type": "string",
             "enum": [
               "on",
               "off"
             ],
             "default": "on",
-            "description": "%nocalhost.nhctl.checkVersion%"
+            "description": "%forkmain.nhctl.checkVersion%"
           }
         }
       }
@@ -75,19 +75,19 @@
     "views": {
       "explorer": [
         {
-          "id": "NocalhostSyncManage",
+          "id": "ForkMainSyncManage",
           "name": "ForkMain Sync Manage"
         }
       ],
       "ForkMainView": [
         {
-          "id": "Nocalhost",
-          "name": "Nocalhost",
+          "id": "ForkMainK8STree",
+          "name": "ForkMainK8STree",
           "type": "tree",
           "when": "!extensionActivated"
         },
         {
-          "id": "Nocalhost.Home",
+          "id": "ForkMain.Home",
           "name": "",
           "type": "webview",
           "when": "extensionActivated"
@@ -96,17 +96,17 @@
     },
     "viewsWelcome": [
       {
-        "view": "Nocalhost",
+        "view": "ForkMainK8STree",
         "contents": "%noReady.description%",
         "when": "!nhctl.upgrade && !extensionActivated"
       },
       {
-        "view": "Nocalhost",
+        "view": "ForkMainK8STree",
         "contents": "%noApps.description%",
         "when": "extensionActivated && emptyCluster"
       },
       {
-        "view": "Nocalhost",
+        "view": "ForkMainK8STree",
         "contents": "%tips.nhctl.updating%",
         "when": "nhctl.upgrade"
       }
@@ -115,188 +115,188 @@
       "view/title": [],
       "view/item/context": [
         {
-          "command": "Nocalhost.openProject",
+          "command": "Forkmain.openProject",
           "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "developing@1"
         },
         {
-          "command": "Nocalhost.run",
+          "command": "Forkmain.run",
           "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "developing@3"
         },
         {
-          "command": "Nocalhost.debug",
+          "command": "Forkmain.debug",
           "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "developing@2"
         },
         {
-          "command": "Nocalhost.showApp",
+          "command": "Forkmain.showApp",
           "when": "viewItem =~ /^devspace-server/i",
           "group": "inline@0"
         },
         {
-          "command": "Nocalhost.installAppSource",
+          "command": "Forkmain.installAppSource",
           "when": "viewItem =~ /^devspace-local/i",
           "group": "inline@0"
         },
         {
-          "command": "Nocalhost.uninstallApp",
+          "command": "Forkmain.uninstallApp",
           "when": "viewItem =~ /^application-nodefault-installed/i",
           "group": "inline@0"
         },
         {
-          "command": "Nocalhost.cleanPvc",
+          "command": "Forkmain.cleanPvc",
           "when": "viewItem =~ /^application-(.*)-installed/i",
           "group": "application@1"
         },
         {
-          "command": "Nocalhost.applyKubernetesObject",
+          "command": "Forkmain.applyKubernetesObject",
           "when": "viewItem =~ /^application-(.*)-installed/i",
           "group": "application@2"
         },
         {
-          "command": "Nocalhost.upgradeApp",
+          "command": "Forkmain.upgradeApp",
           "when": "viewItem =~ /^application-nodefault-installed[-\\w]*-server$/i",
           "group": "application@3"
         },
         {
-          "command": "Nocalhost.cleanPvc",
+          "command": "Forkmain.cleanPvc",
           "when": "viewItem =~ /^devspace/i",
           "group": "navigation"
         },
         {
-          "command": "Nocalhost.cleanPvc",
+          "command": "Forkmain.cleanPvc",
           "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "2"
         },
         {
-          "command": "Nocalhost.startDevMode",
+          "command": "Forkmain.startDevMode",
           "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!(developing|starting|develop_starting|vpn_))/i",
           "group": "inline@0"
         },
         {
-          "command": "Nocalhost.startCopyDevMode",
+          "command": "Forkmain.startCopyDevMode",
           "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!(developing-duplicate|developing-replace-self|starting|vpn_healthy|vpn_unhealthy))/i",
           "group": "navigation"
         },
         {
-          "command": "Nocalhost.startMeshDevMode",
+          "command": "Forkmain.startMeshDevMode",
           "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!(developing-duplicate|developing-replace-self|starting|vpn_healthy|vpn_unhealthy))/i",
           "group": "navigation"
         },
         {
-          "command": "Nocalhost.endDevMode",
+          "command": "Forkmain.endDevMode",
           "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(developing|develop_starting)/i",
           "group": "inline@0"
         },
         {
-          "command": "Nocalhost.editServiceConfig",
+          "command": "Forkmain.editServiceConfig",
           "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "inline@1"
         },
         {
-          "command": "Nocalhost.exec",
+          "command": "Forkmain.exec",
           "when": "viewItem =~ /^workload-(deployment|statefulSet|daemonSet|pod-Running|daemonSet|cronjob|job|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "3"
         },
         {
-          "command": "Nocalhost.copyTerminal",
+          "command": "Forkmain.copyTerminal",
           "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|pod-Running|crd-resources)-dev-(?!vpn_)/i",
           "group": "3"
         },
         {
-          "command": "Nocalhost.reset",
+          "command": "Forkmain.reset",
           "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "2"
         },
         {
-          "command": "Nocalhost.resetDevspace",
+          "command": "Forkmain.resetDevspace",
           "when": "viewItem =~ /^devspace-server/i",
           "group": "navigation"
         },
         {
-          "command": "Nocalhost.log",
+          "command": "Forkmain.log",
           "when": "viewItem =~ /^(viewer:|)workload-(deployment|statefulSet|daemonSet|job|cronJob|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "1"
         },
         {
-          "command": "Nocalhost.editManifest",
+          "command": "Forkmain.editManifest",
           "when": "viewItem =~ /^workload-(deployment|statefulSet|daemonSet|job|cronJob|pod|crd-resources)-dev-(?!vpn_).*(?<!duplicate-self)$/i",
           "title": "%editManifest%",
           "group": "1"
         },
         {
-          "command": "Nocalhost.portForward",
+          "command": "Forkmain.portForward",
           "when": "viewItem =~ /^(viewer:|)workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|pod-Running|crd-resources)-dev-(?!vpn_)/i",
           "group": "1"
         },
         {
-          "command": "Nocalhost.portForward",
+          "command": "Forkmain.portForward",
           "when": "viewItem =~ /^(viewer:|)application-(.*)-installed/i",
           "group": "navigation"
         },
         {
-          "command": "Nocalhost.associateLocalDirectory",
+          "command": "Forkmain.associateLocalDirectory",
           "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "0"
         },
         {
-          "command": "Nocalhost.deleteKubernetesObject",
+          "command": "Forkmain.deleteKubernetesObject",
           "when": "viewItem =~ /^(workload|network|configuration|storage)-\\w+(-\\w+)?(-(complete|running|starting|unknown))?$/i",
           "group": "1"
         },
         {
-          "command": "Nocalhost.viewKubeConfig",
+          "command": "Forkmain.viewKubeConfig",
           "when": "viewItem =~ /^kubeconfig/i",
           "group": "navigation"
         },
         {
-          "command": "Nocalhost.signout",
+          "command": "Forkmain.signout",
           "when": "viewItem =~ /^kubeconfig-server$/i",
           "group": "navigation"
         },
         {
-          "command": "Nocalhost.deleteKubeConfig",
+          "command": "Forkmain.deleteKubeConfig",
           "when": "viewItem =~ /^kubeconfig-local/i",
           "group": "navigation"
         },
         {
-          "command": "Nocalhost.rename",
+          "command": "Forkmain.rename",
           "when": "viewItem =~ /^kubeconfig-local/i",
           "group": "navigation"
         },
         {
-          "command": "Nocalhost.switchAssociate",
+          "command": "Forkmain.switchAssociate",
           "when": "viewItem =~ /^syncAssociate-other/i"
         },
         {
-          "command": "Nocalhost.disassociateAssociate",
+          "command": "Forkmain.disassociateAssociate",
           "when": "viewItem =~ /^syncAssociate-(.*)disassociate/i"
         },
         {
-          "command": "Nocalhost.reconnectSync",
+          "command": "Forkmain.reconnectSync",
           "when": "viewItem =~ /^syncAssociate-(.*)resume/i"
         },
         {
-          "command": "Nocalhost.overrideSync",
+          "command": "Forkmain.overrideSync",
           "when": "viewItem =~ /^syncAssociate-(.*)override/i"
         },
         {
-          "command": "Nocalhost.openSyncDashboard",
+          "command": "Forkmain.openSyncDashboard",
           "when": "viewItem =~ /^syncAssociate-(.*)override/i"
         },
         {
-          "command": "Nocalhost.startProxyMode",
+          "command": "Forkmain.startProxyMode",
           "when": "viewItem =~ /(^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!(developing|starting|develop_starting|vpn_)))|(^network-service-(?!vpn))/i",
           "group": "navigation"
         },
         {
-          "command": "Nocalhost.resumeProxyMode",
+          "command": "Forkmain.resumeProxyMode",
           "when": "viewItem =~ /^(workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)|network-service)(.*)vpn_unhealthy/i",
           "group": "navigation"
         },
         {
-          "command": "Nocalhost.endProxyMode",
+          "command": "Forkmain.endProxyMode",
           "when": "viewItem =~ /^(workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)|network-service)(.*)vpn/i",
           "group": "inline@0"
         }
@@ -314,92 +314,92 @@
     ],
     "commands": [
       {
-        "command": "Nocalhost.resetPlugin",
-        "title": "Nocalhost: Reset Plugin"
+        "command": "Forkmain.resetPlugin",
+        "title": "Forkmain: Reset Plugin"
       },
       {
-        "command": "Nocalhost.debug",
+        "command": "Forkmain.debug",
         "title": "Remote Debug"
       },
       {
-        "command": "Nocalhost.showClusterInfo",
+        "command": "Forkmain.showClusterInfo",
         "title": "Output cluster information"
       },
       {
-        "command": "Nocalhost.clearLocalCluster",
+        "command": "Forkmain.clearLocalCluster",
         "title": "Clear local cluster"
       },
       {
-        "command": "Nocalhost.clearServerCluster",
+        "command": "Forkmain.clearServerCluster",
         "title": "Clear server cluster"
       },
       {
-        "command": "Nocalhost.autoStartDevMode",
+        "command": "Forkmain.autoStartDevMode",
         "title": "Auto Start Dev"
       },
       {
-        "command": "Nocalhost.run",
+        "command": "Forkmain.run",
         "title": "Remote Run"
       },
       {
-        "command": "Nocalhost.ClustersView",
+        "command": "Forkmain.ClustersView",
         "title": "Clusters"
       },
       {
-        "command": "Nocalhost.rename",
+        "command": "Forkmain.rename",
         "title": "%rename%"
       },
       {
-        "command": "Nocalhost.applyKubernetesObject",
+        "command": "Forkmain.applyKubernetesObject",
         "title": "Apply New Manifest"
       },
       {
-        "command": "Nocalhost.deleteKubernetesObject",
+        "command": "Forkmain.deleteKubernetesObject",
         "title": "Delete"
       },
       {
-        "command": "Nocalhost.openEndPoint",
+        "command": "Forkmain.openEndPoint",
         "title": "Open Endpoint"
       },
       {
-        "command": "Nocalhost.signin",
+        "command": "Forkmain.signin",
         "title": "Sign in",
         "icon": "$(sign-in)"
       },
       {
-        "command": "Nocalhost.openSyncCommand",
+        "command": "Forkmain.openSyncCommand",
         "title": "statusBarSync"
       },
       {
-        "command": "Nocalhost.openSyncDashboard",
+        "command": "Forkmain.openSyncDashboard",
         "title": "%sync.openDashboard%"
       },
       {
-        "command": "Nocalhost.syncManage.refresh",
+        "command": "Forkmain.syncManage.refresh",
         "title": "Refresh",
         "alt": "Refresh",
         "icon": "$(refresh)"
       },
       {
-        "command": "Nocalhost.refresh",
+        "command": "Forkmain.refresh",
         "title": "Refresh",
         "alt": "Refresh",
         "icon": "$(refresh)"
       },
       {
-        "command": "Nocalhost.refreshing",
+        "command": "Forkmain.refreshing",
         "title": "Refreshing",
         "alt": "Refreshing",
         "icon": "$(sync~spin)"
       },
       {
-        "command": "Nocalhost.addKubeconfig",
+        "command": "Forkmain.addKubeconfig",
         "title": "Add Cluster",
         "alt": "Add Cluster",
         "icon": "$(add)"
       },
       {
-        "command": "Nocalhost.LocateWorkNode",
+        "command": "Forkmain.LocateWorkNode",
         "title": "Locate Current Service",
         "icon": {
           "dark": "images/icon/locate.svg",
@@ -407,38 +407,38 @@
         }
       },
       {
-        "command": "Nocalhost.installAppSource",
+        "command": "Forkmain.installAppSource",
         "title": "Install App",
         "icon": "$(rocket)"
       },
       {
-        "command": "Nocalhost.showApp",
+        "command": "Forkmain.showApp",
         "title": "Install App",
         "icon": "$(rocket)"
       },
       {
-        "command": "Nocalhost.installApp",
+        "command": "Forkmain.installApp",
         "title": "Install App"
       },
       {
-        "command": "Nocalhost.upgradeApp",
+        "command": "Forkmain.upgradeApp",
         "title": "%upgradeApp%"
       },
       {
-        "command": "Nocalhost.uninstallApp",
+        "command": "Forkmain.uninstallApp",
         "title": "%uninstallApp%",
         "icon": "$(trash)"
       },
       {
-        "command": "Nocalhost.viewKubeConfig",
+        "command": "Forkmain.viewKubeConfig",
         "title": "%ViewKubeConfig%"
       },
       {
-        "command": "Nocalhost.deleteKubeConfig",
+        "command": "Forkmain.deleteKubeConfig",
         "title": "Delete"
       },
       {
-        "command": "Nocalhost.signout",
+        "command": "Forkmain.signout",
         "title": "Logout"
       },
       {
@@ -446,107 +446,107 @@
         "title": "getWordloadList"
       },
       {
-        "command": "Nocalhost.startDevMode",
+        "command": "Forkmain.startDevMode",
         "title": "%Start.Develop%",
         "icon": "images/icon/dev_start.svg",
         "category": "devSpace"
       },
       {
-        "command": "Nocalhost.startCopyDevMode",
+        "command": "Forkmain.startCopyDevMode",
         "title": "%startCopyDevMode%",
         "icon": "images/icon/dev_copy.svg"
       },
       {
-        "command": "Nocalhost.startMeshDevMode",
+        "command": "Forkmain.startMeshDevMode",
         "title": "%startMeshDevMode%",
         "icon": "images/icon/dev_copy.svg"
       },
       {
-        "command": "Nocalhost.endDevMode",
+        "command": "Forkmain.endDevMode",
         "title": "%End.Develop%",
         "icon": "images/icon/dev_end.svg",
         "category": "devSpace"
       },
       {
-        "command": "Nocalhost.reset",
+        "command": "Forkmain.reset",
         "title": "%resetPod%"
       },
       {
-        "command": "Nocalhost.resetDevspace",
+        "command": "Forkmain.resetDevspace",
         "title": "%Reset%"
       },
       {
-        "command": "Nocalhost.exec",
+        "command": "Forkmain.exec",
         "title": "%Terminal%"
       },
       {
-        "command": "Nocalhost.copyTerminal",
+        "command": "Forkmain.copyTerminal",
         "title": "%CopyTerminal%"
       },
       {
-        "command": "Nocalhost.editManifest",
+        "command": "Forkmain.editManifest",
         "title": "%editManifest%"
       },
       {
-        "command": "Nocalhost.log",
+        "command": "Forkmain.log",
         "title": "%Logs%"
       },
       {
-        "command": "Nocalhost.portForward",
+        "command": "Forkmain.portForward",
         "title": "%PortForward%"
       },
       {
-        "command": "Nocalhost.cleanPvc",
+        "command": "Forkmain.cleanPvc",
         "title": "%CleanPvc%"
       },
       {
-        "command": "Nocalhost.editServiceConfig",
+        "command": "Forkmain.editServiceConfig",
         "title": "%viewDevConfig%",
         "icon": "images/icon/setting_normal.svg"
       },
       {
-        "command": "Nocalhost.editHelmValues",
+        "command": "Forkmain.editHelmValues",
         "title": "$HelmValues$",
         "icon": "$(file)"
       },
       {
-        "command": "Nocalhost.associateLocalDirectory",
+        "command": "Forkmain.associateLocalDirectory",
         "title": "%AssociateLocalDir%"
       },
       {
-        "command": "Nocalhost.openProject",
+        "command": "Forkmain.openProject",
         "title": "%OpenProject%"
       },
       {
-        "command": "Nocalhost.reconnectSync",
+        "command": "Forkmain.reconnectSync",
         "shortTitle": "resume",
         "title": "%resumeSync%"
       },
       {
-        "command": "Nocalhost.overrideSync",
+        "command": "Forkmain.overrideSync",
         "shortTitle": "override",
         "title": "%overrideRemoteChang%"
       },
       {
-        "command": "Nocalhost.switchAssociate",
+        "command": "Forkmain.switchAssociate",
         "title": "%switchAssociate%"
       },
       {
-        "command": "Nocalhost.disassociateAssociate",
+        "command": "Forkmain.disassociateAssociate",
         "title": "%disassociateAssociate%"
       },
       {
-        "command": "Nocalhost.startProxyMode",
+        "command": "Forkmain.startProxyMode",
         "title": "%startProxyMode%",
         "icon": "images/icon/vpn.svg"
       },
       {
-        "command": "Nocalhost.resumeProxyMode",
+        "command": "Forkmain.resumeProxyMode",
         "title": "%resumeProxyMode%",
         "icon": "images/icon/vpn_disconnect.svg"
       },
       {
-        "command": "Nocalhost.endProxyMode",
+        "command": "Forkmain.endProxyMode",
         "title": "%endProxyMode%",
         "icon": "images/icon/vpn_close.svg"
       }
