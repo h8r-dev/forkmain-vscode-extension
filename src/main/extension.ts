@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import * as nls from "vscode-nls";
+import axios from "axios";
 
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
@@ -44,11 +45,7 @@ import initCommands from "./commands";
 import { ControllerNodeApi } from "./commands/StartDevModeCommand";
 import { BaseNocalhostNode, DeploymentStatus } from "./nodes/types/nodeType";
 import NocalhostWebviewPanel from "./webview/NocalhostWebviewPanel";
-import {
-  checkVersion,
-  moniterClusterState,
-  ClusterDevState,
-} from "./ctl/nhctl";
+import { checkVersion } from "./ctl/nhctl";
 import logger from "./utils/logger";
 import * as fileUtil from "./utils/fileUtil";
 import { KubernetesResourceFolder } from "./nodes/abstract/KubernetesResourceFolder";
@@ -67,19 +64,32 @@ import { storeAccountToken, storeApplication } from "./account";
 // The example uses the file message format.
 nls.config({ messageFormat: nls.MessageFormat.file })();
 
-const envVariables: any = {
-  FORKMAIN_URL: "http://localhost",
-};
-
-if (process.env.NODE_ENV === "production") {
-  envVariables.FORKMAIN_URL = "https://forkmain.com";
-}
-
-Object.keys(envVariables).forEach(
-  (key: string) => (process.env[key] = envVariables[key])
-);
-
 export let appTreeView: vscode.TreeView<BaseNocalhostNode> | null | undefined;
+
+async function getKubeconfig(
+  baseURL: string,
+  token: string,
+  orgId: string,
+  clusterId: string
+): Promise<string> {
+  const resp = await axios.get(`/api/orgs/${orgId}/clusters/${clusterId}`, {
+    baseURL,
+    timeout: 5000, // waits for 5 seconds.
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (resp.status !== 200) {
+    host.log(`Fetch kubeconfig failed!`, true);
+    host.showInformationMessage(`Fetch kubeconfig failed!`);
+    return "";
+  } else {
+    host.log("Fetch kubeconfig from forkmain backend api successfully!", true);
+  }
+
+  return resp.data.kubeconfig;
+}
 
 export async function activate(context: vscode.ExtensionContext) {
   await init(context);
@@ -105,7 +115,28 @@ export async function activate(context: vscode.ExtensionContext) {
   const handleUri = async (uri: vscode.Uri) => {
     const queryParams: URLSearchParams = new URLSearchParams(uri.query);
 
-    if (!queryParams.get("kubeconfig")) {
+    if (!queryParams.get("token")) {
+      host.log("Token parameter is required to enter dev mode.", true);
+      host.showInformationMessage(
+        "Token parameter is required to enter dev mode."
+      );
+      return;
+    }
+
+    const token: string = queryParams.get("token");
+
+    const kubeconfig = await getKubeconfig(
+      queryParams.get("baseUrl"),
+      token,
+      queryParams.get("orgId"),
+      queryParams.get("clusterId")
+    );
+
+    if (!kubeconfig) {
+      host.log("Failed to fetch kubeconfig from forkmain backend api", true);
+      host.showInformationMessage(
+        "Failed to fetch kubeconfig from forkmain backend api"
+      );
       return;
     }
 
@@ -113,7 +144,7 @@ export async function activate(context: vscode.ExtensionContext) {
       AUTO_START_DEV_MODE,
       {
         connectionInfo: {
-          strKubeconfig: queryParams.get("kubeconfig"),
+          strKubeconfig: kubeconfig,
           namespace: queryParams.get("namespace"),
         },
         application: queryParams.get("application"),
@@ -124,7 +155,6 @@ export async function activate(context: vscode.ExtensionContext) {
       appTreeProvider
     );
 
-    const token = queryParams.get("token");
     const email = queryParams.get("email");
 
     // Maybe we should store data after developer entering dev mode successfully.
@@ -226,63 +256,6 @@ export async function activate(context: vscode.ExtensionContext) {
 
   createSyncManage(context);
   activateNocalhostDebug(context);
-
-  // syncDevState();
-}
-
-function syncDevState() {
-  // Fetch kubeconfig and application details from stored data.
-
-  // If no kubeconfig found, exit, no timer will be created.
-
-  // kubeconfig: string,
-  // namespace: string,
-  // workloadType: string,
-  // workload: string,
-
-  setInterval(async () => {
-    host.log(`Sync dev state between cluster and local workspace`, true);
-
-    // Monitor dev state of local workspace.
-
-    // If local workspace is under development, has that flag enabled.
-    // Then check remote cluster.
-    // If remote cluster is off dev state.
-    // Then clear local state.
-
-    // If remote cluster is dev state, and local workspace is off
-    // That means the local state modified manually
-    // You have to enter dev mode locally youself, click `reconnect` button.
-
-    try {
-      // const clusterDevState = await moniterClusterState();
-
-      const localDevState = await localWorkspaceDevState();
-
-      // TODO: Compare cluster state with local state.
-
-      // Obey state from remote cluster and if local lost connection.
-
-      // host.showErrorMessage('Local workspace lost connection to remote cluster, you can click `Reconnect` button to reconnect');
-      // Notify the developer.
-    } catch (err) {
-      host.log(`Monitor cluster dev state with error: ${err}`);
-    }
-  }, 10000);
-}
-
-async function localWorkspaceDevState(): Promise<ClusterDevState> {
-  // Check sync file service state
-
-  // Check if debugger connected!
-
-  // Check if remote terminal connected!
-
-  return {
-    isUnderDeveloping: false,
-    isDebugEnabled: false,
-    isRunEnabled: false,
-  };
 }
 
 function bindEvent() {
