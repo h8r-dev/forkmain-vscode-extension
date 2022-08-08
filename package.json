@@ -553,8 +553,8 @@
     ],
     "debuggers": [
       {
-        "type": "nocalhost",
-        "label": "Nocalhost",
+        "type": "Forkmain",
+        "label": "Forkmain",
         "languages": [
           "javascript",
           "go",
@@ -568,19 +568,19 @@
         },
         "initialConfigurations": [
           {
-            "type": "nocalhost",
+            "type": "forkmain",
             "request": "attach",
-            "name": "Nocalhost Debug"
+            "name": "Forkmain Debug"
           }
         ],
         "configurationSnippets": [
           {
-            "label": "Nocalhost Debug: Attach",
-            "description": "A new configuration for 'debugging' a nocalhost.",
+            "label": "Forkmain Debug: Attach",
+            "description": "A new configuration for 'debugging' a forkmain.",
             "body": {
-              "type": "nocalhost",
+              "type": "forkmain",
               "request": "attach",
-              "name": "Nocalhost Debug"
+              "name": "Forkmain Debug"
             }
           }
         ]

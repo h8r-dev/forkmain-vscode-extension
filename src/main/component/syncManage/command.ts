@@ -4,9 +4,9 @@ import { AssociateNode } from "./node";
 import * as nhctl from "../../ctl/nhctl";
 import host from "../../host";
 import { SyncManageDataProvider } from "./provider";
-export const DISASSOCIATE_ASSOCIATE = "Nocalhost.disassociateAssociate";
-const SWITCH_ASSOCIATE = "Nocalhost.switchAssociate";
-const SYNC_MANAGE_REFRESH = "Nocalhost.syncManage.refresh";
+export const DISASSOCIATE_ASSOCIATE = "Forkmain.disassociateAssociate";
+const SWITCH_ASSOCIATE = "Forkmain.switchAssociate";
+const SYNC_MANAGE_REFRESH = "Forkmain.syncManage.refresh";
 
 function disassociateAssociate(treeDataProvider: SyncManageDataProvider) {
   return vscode.commands.registerCommand(

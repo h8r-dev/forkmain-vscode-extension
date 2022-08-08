@@ -38,7 +38,7 @@ export default class NocalhostFileSystemProvider implements FileSystemProvider {
     destination: Uri,
     options: { overwrite: boolean }
   ): void | Thenable<void> {}
-  static supportScheme = ["Nocalhost", "NocalhostRW"];
+  static supportScheme = ["Forkmain", "ForkmainRW"];
   static supportAuthority = ["k8s", "nh"];
   public dataMap: Map<Uri, Uint8Array> = new Map();
   private readonly onDidChangeFileEmitter: EventEmitter<FileChangeEvent[]> =

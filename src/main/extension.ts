@@ -229,12 +229,12 @@ export async function activate(context: vscode.ExtensionContext) {
     }),
     appTreeView,
     vscode.workspace.registerFileSystemProvider(
-      "Nocalhost",
+      "Forkmain",
       nocalhostFileSystemProvider,
       { isReadonly: true }
     ),
     vscode.workspace.registerFileSystemProvider(
-      "NocalhostRW",
+      "ForkmainRW",
       nocalhostFileSystemProvider
     ),
     vscode.window.registerUriHandler({ handleUri }),
