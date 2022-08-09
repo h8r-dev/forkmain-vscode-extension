@@ -69,8 +69,10 @@ export default class DebugCommand implements ICommand {
 
       if (!param?.command) {
         const status = await node.getStatus(true);
+        host.log(`Current status of the node: ${status}`, true);
 
         if (status !== "developing") {
+          host.log(`Execute START_DEV_MODE command from DEBUG command`, true);
           vscode.commands.executeCommand(START_DEV_MODE, node, {
             command: DEBUG,
             configuration: this.configuration,
@@ -80,10 +82,13 @@ export default class DebugCommand implements ICommand {
         }
       }
 
+      host.log("Waiting for getting debug Provider");
       const debugProvider = await this.getDebugProvider();
 
+      host.log("Waitting for sync files in DEBUG command.", true);
       await waitForSync(node, DEBUG);
 
+      host.log("Start Debugging in DEBUG command.", true);
       this.startDebugging(node, debugProvider);
     });
   }
