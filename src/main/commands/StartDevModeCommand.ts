@@ -144,7 +144,7 @@ export default class StartDevModeCommand implements ICommand {
         return;
       }
 
-      host.log("Get local workspace dir...", true);
+      host.log("Get local workspace source code dir...", true);
 
       const destDir = await this.cloneOrGetFolderDir(
         appName,
@@ -156,12 +156,14 @@ export default class StartDevModeCommand implements ICommand {
         return;
       }
 
+      host.log("Get Image name...", true);
       image = await this.getImageName(image, containerName);
 
       if (!image) {
         return;
       }
 
+      host.log("Save dev config...", true);
       await this.saveConfig(
         kubeConfigPath,
         namespace,
@@ -177,6 +179,7 @@ export default class StartDevModeCommand implements ICommand {
         destDir === true ||
         (destDir && destDir === host.getCurrentRootPath())
       ) {
+        host.log("Start dev mode...", true);
         await this.startDevMode(
           host,
           appName,
@@ -196,6 +199,7 @@ export default class StartDevModeCommand implements ICommand {
           image,
           header
         );
+        host.log("Emit devStart event...", true);
         messageBus.emit("devStart", {
           name: appName,
           destDir,
