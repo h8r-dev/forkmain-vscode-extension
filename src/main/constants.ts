@@ -3,7 +3,7 @@ import * as path from "path";
 
 const isWindow = require("is-windows");
 
-export const NOCALHOST = "Nocalhost";
+export const NOCALHOST = "Forkmain";
 
 export const HOME_DIR = homedir();
 export const NH_CONFIG_DIR = path.resolve(HOME_DIR, ".nh");

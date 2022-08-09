@@ -60,21 +60,28 @@ export default class RunCommand implements ICommand {
 
       if (!param?.command) {
         const status = await node.getStatus(true);
+        host.log(`Current status of the node: ${status}`, true);
 
         if (status !== "developing") {
+          host.log(`Execute START_DEV_MODE command from RUN command`, true);
           vscode.commands.executeCommand(START_DEV_MODE, node, {
             command: RUN,
             isAutoMode: this.isAutoMode,
           });
           return;
+        } else {
+          host.log(
+            `The node is on: ${status} status, which will not execute: START_DEV_MODE command`,
+            true
+          );
         }
       }
 
+      host.log("Waitting for sync files in RUN command.", true);
       await waitForSync(node, RUN);
 
-      const name = `${capitalCase(node.name)} Process Console`;
-
-      await this.startRun(name);
+      host.log("Start run in RUN command.", true);
+      await this.startRun(`${capitalCase(node.name)} Process Console`);
     });
   }
 

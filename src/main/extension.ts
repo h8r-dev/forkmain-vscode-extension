@@ -157,8 +157,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
     const email = queryParams.get("email");
 
-    // Maybe we should store data after developer entering dev mode successfully.
-
+    // TODO: Maybe we should store data after developer entering dev mode successfully.
     // TODO: store associated dir.
     storeAccountToken({ email, token });
 

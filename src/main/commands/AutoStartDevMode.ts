@@ -84,12 +84,16 @@ export default class AutoStartDevModeCommand implements ICommand {
         );
 
         if (newLocalCluster) {
+          host.log("New cluster added!", true);
           await this.addNewCluster(newLocalCluster);
+        } else {
+          host.log("Use an existing cluster!", true);
         }
 
         const rootNode = Promise.resolve(
           appTreeProvider as Pick<BaseNocalhostNode, "getChildren">
         );
+
         const targetWorkloadNode: BaseNocalhostNode =
           await this.locateWorkerloadNode(rootNode, searchPath);
 

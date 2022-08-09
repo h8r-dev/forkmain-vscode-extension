@@ -26,6 +26,8 @@ export default class EndDevModeCommand implements ICommand {
     host.log(`${this.command} command executed!`, true);
 
     let result = "Yes";
+
+    host.log("Get service config by running nhctl.getserviceconfig.", true);
     const svcProfile = await nhctl.getServiceConfig(
       node.getKubeConfigPath(),
       node.getNameSpace(),
@@ -47,6 +49,7 @@ export default class EndDevModeCommand implements ICommand {
     }
 
     if (result !== "Yes") {
+      host.log("Yes, to not exit from dev mode.", true);
       return;
     }
 
@@ -55,6 +58,8 @@ export default class EndDevModeCommand implements ICommand {
     const devSpace = appNode.getParent() as DevSpaceNode;
     host.disposeWorkload(devSpace.info.spaceName, appNode.name, node.name);
 
+    host.log(`Emit endDevMode event from ${this.command} command`, true);
+
     messageBus.emit("endDevMode", {
       devSpaceName: devSpace.info.spaceName,
       appName: appNode.name,
@@ -62,6 +67,7 @@ export default class EndDevModeCommand implements ICommand {
     });
 
     host.showProgressing("Ending dev mode...", async () => {
+      host.log("Running nhctl.endDevMode command...", true);
       await nhctl.endDevMode(
         host,
         node.getKubeConfigPath(),
