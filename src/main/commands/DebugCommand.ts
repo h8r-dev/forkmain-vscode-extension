@@ -255,9 +255,9 @@ export default class DebugCommand implements ICommand {
       if (Array.isArray(configurations)) {
         let index = configurations.findIndex(
           (item) =>
-            item.type === "nocalhost" &&
+            item.type === "forkmain" &&
             item.request === "attach" &&
-            item.name === "Nocalhost Debug"
+            item.name === "Forkmain Debug"
         );
 
         if (index > -1) {
@@ -265,9 +265,9 @@ export default class DebugCommand implements ICommand {
         }
 
         configurations.unshift({
-          type: "nocalhost",
+          type: "forkmain",
           request: "attach",
-          name: "Nocalhost Debug",
+          name: "Forkmain Debug",
         });
 
         fs.writeFileSync(filePath, JSON.stringify(launch, null, 2));

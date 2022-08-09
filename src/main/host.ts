@@ -9,7 +9,8 @@ import {
 import { RemoteGlobalMemento } from "./utils/remoteGlobalMemento";
 export class Host implements vscode.Disposable {
   private outputChannel: vscode.OutputChannel =
-    vscode.window.createOutputChannel("Nocalhost");
+    vscode.window.createOutputChannel("Forkmain");
+
   public statusBar = vscode.window.createStatusBarItem(
     vscode.StatusBarAlignment.Left,
     100

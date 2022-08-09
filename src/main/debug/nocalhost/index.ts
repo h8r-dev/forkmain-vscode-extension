@@ -4,7 +4,7 @@ import { NocalhostDebugAdapterDescriptorFactory } from "./debugAdapter";
 export function activateNocalhostDebug(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.debug.registerDebugAdapterDescriptorFactory(
-      "nocalhost",
+      "Forkmain",
       new NocalhostDebugAdapterDescriptorFactory()
     )
   );

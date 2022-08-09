@@ -7,7 +7,7 @@ import { ControllerResourceNode } from "../../nodes/workloads/controllerResource
 import { vpn } from "../../ctl/nhctl";
 
 export default class ResumeProxyModeCommand implements ICommand {
-  command: string = "Nocalhost.resumeProxyMode";
+  command: string = "Forkmain.resumeProxyMode";
   context: vscode.ExtensionContext;
   constructor(context: vscode.ExtensionContext) {
     this.context = context;

@@ -20,13 +20,12 @@ export default class DeleteKubernetesObjectCommand implements ICommand {
     const nodeName: string = node.name;
     const namespace: string = node.getAppNode().namespace;
     const kubeConfig: string = node.getKubeConfigPath();
-    const confirm:
-      | string
-      | undefined = await vscode.window.showInformationMessage(
-      `Delete: ${nodeName}?`,
-      { modal: true },
-      "OK"
-    );
+    const confirm: string | undefined =
+      await vscode.window.showInformationMessage(
+        `Delete: ${nodeName}?`,
+        { modal: true },
+        "OK"
+      );
     if (confirm !== "OK") {
       return;
     }
@@ -46,7 +45,7 @@ export default class DeleteKubernetesObjectCommand implements ICommand {
         const { success, value } = result;
         if (success) {
           host.showInformationMessage(value);
-          vscode.commands.executeCommand("Nocalhost.refresh");
+          vscode.commands.executeCommand("Forkmain.refresh");
         } else {
           host.showErrorMessage(value);
         }

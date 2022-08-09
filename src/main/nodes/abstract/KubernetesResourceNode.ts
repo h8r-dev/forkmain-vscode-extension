@@ -32,11 +32,6 @@ export abstract class KubernetesResourceNode implements BaseNocalhostNode {
       vscode.TreeItemCollapsibleState.None
     );
     treeItem.label = this.label;
-    // treeItem.command = {
-    //   command: "Nocalhost.loadResource",
-    //   title: "loadResource",
-    //   arguments: [this],
-    // };
     return treeItem;
   }
 
@@ -104,7 +99,7 @@ export abstract class KubernetesResourceNode implements BaseNocalhostNode {
     if (parent) {
       await parent.updateData();
 
-      vscode.commands.executeCommand("Nocalhost.refresh", parent);
+      vscode.commands.executeCommand("Forkmain.refresh", parent);
     }
   }
 }

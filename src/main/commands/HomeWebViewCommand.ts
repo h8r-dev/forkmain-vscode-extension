@@ -6,7 +6,7 @@ import ICommand from "./ICommand";
 import registerCommand from "./register";
 
 export default class HomeWebViewCommand implements ICommand {
-  command: string = "Nocalhost.homeWebView";
+  command: string = "Forkmain.homeWebView";
   constructor(context: vscode.ExtensionContext) {
     registerCommand(context, this.command, false, this.execCommand.bind(this));
   }
@@ -19,7 +19,7 @@ export default class HomeWebViewCommand implements ICommand {
       while (count++ < 2) {
         void (await vscode.commands.executeCommand("vscode.moveViews", {
           viewIds: [],
-          destinationId: "workbench.view.extension.ForkMainView",
+          destinationId: "workbench.view.extension.ForkmainView",
         }));
       }
     } catch {}

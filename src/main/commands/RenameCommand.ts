@@ -50,6 +50,6 @@ export default class ResetCommand implements ICommand {
     host.setGlobalState(LOCAL_PATH, localClusterNodes);
 
     node.label = clusterName;
-    await vscode.commands.executeCommand("Nocalhost.refresh", node);
+    await vscode.commands.executeCommand("Forkmain.refresh", node);
   }
 }

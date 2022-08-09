@@ -93,7 +93,7 @@ export default class PortForwardCommand implements ICommand {
       resourceType,
     });
 
-    await vscode.commands.executeCommand("Nocalhost.refresh", this.node.parent);
+    await vscode.commands.executeCommand("Forkmain.refresh", this.node.parent);
 
     host.showInformationMessage(`Ended Port Forward ${port}`);
 

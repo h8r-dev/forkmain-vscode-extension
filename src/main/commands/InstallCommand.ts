@@ -267,7 +267,7 @@ export default class InstallCommand implements ICommand {
       refOrVersion,
       local
     );
-    await vscode.commands.executeCommand("Nocalhost.refresh");
+    await vscode.commands.executeCommand("Forkmain.refresh");
     await host.delay(1000);
   }
 

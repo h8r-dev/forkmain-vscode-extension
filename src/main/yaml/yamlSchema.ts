@@ -14,18 +14,18 @@ declare type YamlSchemaContributor = (
 function requestYamlSchemaUriCallback(resource: string): string | undefined {
   const resourceUri = vscode.Uri.parse(resource);
   const authority = resourceUri.authority;
-  // NocalhostRW://nh/config/app/coding-agile/services/api-docs-backend.yaml  service config
-  // NocalhostRW://nh/config/app/coding-agile.yaml  app config
+  // ForkmainRW://nh/config/app/coding-agile/services/api-docs-backend.yaml  service config
+  // ForkmainRW://nh/config/app/coding-agile.yaml  app config
   if (authority === "nh") {
     const paths = resourceUri.path.split("/");
     const type = paths[1];
     if (type === "config") {
       const isService = paths[2] === "app" && paths[4] === "services";
       if (isService) {
-        return "NocalhostRW://schema/config/service";
+        return "ForkmainRW://schema/config/service";
       }
 
-      return "NocalhostRW://schema/config/app";
+      return "ForkmainRW://schema/config/app";
     }
   }
   return undefined;
@@ -33,9 +33,9 @@ function requestYamlSchemaUriCallback(resource: string): string | undefined {
 
 // see docs from YamlSchemaContributor
 function requestYamlSchemaContentCallback(uri: string): string | undefined {
-  if (uri === "NocalhostRW://schema/config/app") {
+  if (uri === "ForkmainRW://schema/config/app") {
     return JSON.stringify(appSchema);
-  } else if (uri === "NocalhostRW://schema/config/service") {
+  } else if (uri === "ForkmainRW://schema/config/service") {
     return JSON.stringify(serviceSchema);
   }
 
@@ -50,7 +50,7 @@ export async function registerYamlSchemaSupport(): Promise<void> {
   }
   // register for kubernetes schema provider
   yamlPlugin.registerContributor(
-    "NocalhostRW",
+    "ForkmainRW",
     requestYamlSchemaUriCallback,
     requestYamlSchemaContentCallback
   );
@@ -70,7 +70,7 @@ async function activateYamlExtension(): Promise<
 
   if (!yamlPlugin || !yamlPlugin.registerContributor) {
     vscode.window.showWarningMessage(
-      "The installed Red Hat YAML extension doesn't support Nocalhost Intellisense. Please upgrade 'YAML Support by Red Hat' via the Extensions pane."
+      "The installed Red Hat YAML extension doesn't support Forkmain Intellisense. Please upgrade 'YAML Support by Red Hat' via the Extensions pane."
     );
     return undefined;
   }

@@ -6,7 +6,7 @@ import ICommand from "../ICommand";
 import registerCommand from "../register";
 
 export default class StartProxyModeCommand implements ICommand {
-  command: string = "Nocalhost.startProxyMode";
+  command: string = "Forkmain.startProxyMode";
   context: vscode.ExtensionContext;
   constructor(context: vscode.ExtensionContext) {
     this.context = context;

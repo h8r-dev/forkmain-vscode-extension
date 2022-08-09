@@ -41,7 +41,7 @@ export default class RefreshCommand implements ICommand {
 }
 
 export class RefreshingCommand implements ICommand {
-  command: string = "Nocalhost.refreshing";
+  command: string = "Forkmain.refreshing";
   constructor(context: vscode.ExtensionContext) {
     registerCommand(context, this.command, false, this.execCommand.bind(this));
   }

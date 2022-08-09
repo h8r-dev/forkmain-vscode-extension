@@ -8,7 +8,7 @@ import { SyncManageDataProvider } from "./provider";
 export function createSyncManage(context: vscode.ExtensionContext) {
   const syncManageDataProvider = new SyncManageDataProvider();
 
-  const treeView = vscode.window.createTreeView("NocalhostSyncManage", {
+  const treeView = vscode.window.createTreeView("ForkmainSyncManage", {
     treeDataProvider: syncManageDataProvider,
   });
 

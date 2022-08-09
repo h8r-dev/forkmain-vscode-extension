@@ -91,6 +91,7 @@ export default class SyncServiceCommand implements ICommand {
         syncData.app,
         syncData.service
       );
+
       if (!result) {
         return;
       }
@@ -98,7 +99,7 @@ export default class SyncServiceCommand implements ICommand {
       r = JSON.parse(result) as SyncMsg;
 
       host.statusBar.text = `$(${this.getIcon(r.status)}) ${r.msg}`;
-      host.statusBar.tooltip = r.tips;
+      host.statusBar.tooltip = r.tips.replace('Nocalhost', 'Forkmain');
 
       if (r.status !== "end") {
         host.statusBar.command = {

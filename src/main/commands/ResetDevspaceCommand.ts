@@ -36,7 +36,7 @@ export default class ResetDevspaceCommand implements ICommand {
 
     state.setAppState(node.getNodeStateId(), "resetting", true);
 
-    await vscode.commands.executeCommand("Nocalhost.refresh", node);
+    await vscode.commands.executeCommand("Forkmain.refresh", node);
 
     host.disposeDevspace(node.info.spaceName);
     await this.reset(
@@ -51,7 +51,7 @@ export default class ResetDevspaceCommand implements ICommand {
 
       await nocalhostRootNode.updateData();
 
-      vscode.commands.executeCommand("Nocalhost.refresh", nocalhostRootNode);
+      vscode.commands.executeCommand("Forkmain.refresh", nocalhostRootNode);
 
       state.delete(node.info.spaceName);
     });
