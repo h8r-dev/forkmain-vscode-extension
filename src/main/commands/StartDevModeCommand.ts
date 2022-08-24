@@ -65,7 +65,7 @@ type StartDevModeInfoType = {
 
 const ValidWorkloadTypes: string[] = [
   "Deployments",
-  "StatefuleSets",
+  "StatefulSets",
   "DaemonSets",
   "Jobs",
   "CronJobs",
