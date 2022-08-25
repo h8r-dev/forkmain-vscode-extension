@@ -1,6 +1,6 @@
 {
   "name": "forkmain",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "displayName": "ForkMain",
   "description": "Makes developing with Kubernetes feel like on local. IDE tool for cloud-native development",
   "license": "Apache-2.0",

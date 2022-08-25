@@ -269,6 +269,7 @@ function bindEvent() {
   });
 
   messageBus.on("devStart", (value) => {
+    host.log("[Catch devStart] Message Bus catch devStart event.", true);
     if (value.source !== (host.getCurrentRootPath() || "")) {
       launchDevSpace();
     }
@@ -319,6 +320,8 @@ function bindEvent() {
 }
 
 function launchDevSpace() {
+  host.log('[launchDevSpace]', true);
+
   SyncServiceCommand.checkSync();
 
   const tmpWorkloadPath = host.getGlobalState(TMP_WORKLOAD_PATH);
