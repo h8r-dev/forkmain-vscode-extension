@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
 import * as os from "os";
-import { get as _get } from "lodash";
 import { existsSync } from "fs";
 import ICommand from "./ICommand";
 import { START_DEV_MODE, SYNC_SERVICE } from "./constants";
@@ -107,6 +106,7 @@ export default class StartDevModeCommand implements ICommand {
 
     host.showProgressing("Connecting to remote workspace...", async () => {
       // Do not check CRD workload.
+      // Todo: resourceType didn't coincidence.
       if (ValidWorkloadTypes.includes(node.resourceType)) {
         host.log(`${this.command}: auth check...`, true);
         await nhctl.NhctlCommand.authCheck({
@@ -174,6 +174,9 @@ export default class StartDevModeCommand implements ICommand {
         "image",
         image as string
       );
+
+      host.log('[destDir]' + destDir, true);
+      host.log('[getCurrentRootPath]' + host.getCurrentRootPath(), true);
 
       if (
         destDir === true ||
@@ -471,6 +474,14 @@ export default class StartDevModeCommand implements ICommand {
     }
 
     if (destDir && destDir !== true) {
+      if(host.isWindow) {
+        // Make drive letter lowercase to equal `vscode.workspace.workspaceFolders`
+        // Issue: https://github.com/microsoft/vscode/issues/116232
+        const driveLetterRegExp = /^[A-Za-z]:/;
+        const replace = destDir.match(driveLetterRegExp)?.[0]?.toLowerCase();
+        replace && (destDir = destDir.replace(driveLetterRegExp, replace));
+      }
+
       await nhctl.associate(
         node.getKubeConfigPath(),
         node.getNameSpace(),
