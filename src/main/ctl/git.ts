@@ -17,7 +17,7 @@ class Git {
       // https protocol
       const [scheme, host] = gitUrl.split("://");
       const [_, user, project] = host.split("/");
-      return [user, project];
+      return [user, project.replace(/\.git$/, "")];
     }
 
     if (gitUrl.startsWith("git@")) {
@@ -89,7 +89,9 @@ class Git {
       return true;
     }
 
-    host.showInformationMessage("You have to enter your credentials to clone the source code.");
+    host.showInformationMessage(
+      "You have to enter your credentials to clone the source code."
+    );
 
     // Prompt window to input username && password, and use https protocol
     const username = await host.showInputBox({
