@@ -89,7 +89,9 @@ class Git {
       return true;
     }
 
-    host.showInformationMessage("You have to enter your credentials to clone the source code.");
+    host.showInformationMessage(
+      "You have to enter your credentials to clone the source code."
+    );
 
     // Prompt window to input username && password, and use https protocol
     const username = await host.showInputBox({
