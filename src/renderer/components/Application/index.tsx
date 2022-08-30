@@ -62,6 +62,7 @@ const ApplicationComp: React.FC<ApplicationProps> = ({ app }) => {
           style={{
             width: 100,
             marginLeft: 20,
+            display: "none",
           }}
           title="Debug the service with remote debugger"
           onClick={remoteDebug}
