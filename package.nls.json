@@ -24,6 +24,7 @@
   "OpenProject": "Open Project",
   "editManifest": "Edit Manifest",
   "forkmain.nhctl.checkVersion": "When enabled,automatic detection of upgrade Nhctl when the plugin starts",
+  "forkmain.originUrl": "The original URL to authentication and fetch kubeconfig.",
   "forkmain.showWelcome": "When enabled, show forkmain welcome page when starting vscode",
   "loadKubeConfig": "Load KubeConfig",
   "rename": "Rename",

@@ -17,7 +17,7 @@ class Git {
       // https protocol
       const [scheme, host] = gitUrl.split("://");
       const [_, user, project] = host.split("/");
-      return [user, project];
+      return [user, project.replace(/\.git$/, "")];
     }
 
     if (gitUrl.startsWith("git@")) {
@@ -71,7 +71,7 @@ class Git {
     this.host = host;
     this.args = args;
 
-    const [user, project] = this.parseGitUrl(gitUrl);
+    const [user, project] = this.parseGitUrl(gitUrl); 
     this.user = user;
     this.project = project;
 

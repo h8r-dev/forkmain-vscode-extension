@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
 import * as nls from "vscode-nls";
-import axios from "axios";
 
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
@@ -33,8 +32,8 @@ import {
   NH_BIN,
   TMP_DEV_START_COMMAND,
   TMP_COMMAND,
-  PLUGIN_CONFIG_PROJECTS_DIR,
-  PLUGIN_CONFIG_ACCOUNT_DIR,
+  FORKMAIN_BASE_DIR,
+  FORKMAIN_ACCOUNT_DIR,
 } from "./constants";
 
 import host from "./host";
@@ -60,36 +59,12 @@ import { createSyncManage } from "./component/syncManage";
 import { activateNocalhostDebug } from "./debug/nocalhost";
 
 import { storeAccountToken, storeApplication } from "./account";
+import { getKubeconfig } from "./utils/getKubconfig";
 
 // The example uses the file message format.
 nls.config({ messageFormat: nls.MessageFormat.file })();
 
 export let appTreeView: vscode.TreeView<BaseNocalhostNode> | null | undefined;
-
-async function getKubeconfig(
-  baseURL: string,
-  token: string,
-  orgId: string,
-  clusterId: string
-): Promise<string> {
-  const resp = await axios.get(`/api/orgs/${orgId}/clusters/${clusterId}`, {
-    baseURL,
-    timeout: 5000, // waits for 5 seconds.
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  if (resp.status !== 200) {
-    host.log(`Fetch kubeconfig failed!`, true);
-    host.showInformationMessage(`Fetch kubeconfig failed!`);
-    return "";
-  } else {
-    host.log("Fetch kubeconfig from forkmain backend api successfully!", true);
-  }
-
-  return resp.data.kubeconfig;
-}
 
 export async function activate(context: vscode.ExtensionContext) {
   await init(context);
@@ -165,6 +140,7 @@ export async function activate(context: vscode.ExtensionContext) {
       email,
       organization: queryParams.get("organization"),
       application: queryParams.get("app"),
+      appName: queryParams.get("app_name"),
       service: queryParams.get("service"),
       action: queryParams.get("action"),
       kubeconfig: queryParams.get("kubeconfig"),
@@ -460,7 +436,7 @@ export async function updateServerConfigStatus() {
 
 async function init(context: vscode.ExtensionContext) {
   await host.setContext(context);
-  fileUtil.mkdir(PLUGIN_CONFIG_PROJECTS_DIR);
+  fileUtil.mkdir(FORKMAIN_BASE_DIR);
 
   fileUtil.mkdir(NH_CONFIG_DIR);
   fileUtil.mkdir(PLUGIN_CONFIG_DIR);
@@ -471,7 +447,7 @@ async function init(context: vscode.ExtensionContext) {
   fileUtil.mkdir(NH_BIN);
 
   // Create accounts dir.
-  fileUtil.mkdir(PLUGIN_CONFIG_ACCOUNT_DIR);
+  fileUtil.mkdir(FORKMAIN_ACCOUNT_DIR);
 
   // fileStore.initConfig();
   host.setGlobalState("extensionPath", context.extensionPath);
