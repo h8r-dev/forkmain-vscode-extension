@@ -6,6 +6,7 @@ const isWindow = require("is-windows");
 export const NOCALHOST = "Forkmain";
 
 export const HOME_DIR = homedir();
+
 export const NH_CONFIG_DIR = path.resolve(HOME_DIR, ".nh");
 export const PLUGIN_CONFIG_DIR = path.resolve(NH_CONFIG_DIR, "vscode-plugin");
 export const PLUGIN_TEMP_DIR = path.resolve(PLUGIN_CONFIG_DIR, ".tmp");
@@ -14,18 +15,17 @@ export const USER_CONFIG_FULLPATH = path.resolve(
   PLUGIN_CONFIG_DIR,
   "config.json"
 );
+  
 
-// Store all cloned git projects here.
-export const PLUGIN_CONFIG_PROJECTS_DIR = path.resolve(
-  PLUGIN_CONFIG_DIR,
-  "projects"
-);
-
-// Store all login accounts.
-export const PLUGIN_CONFIG_ACCOUNT_DIR = path.resolve(
-  PLUGIN_CONFIG_DIR,
-  "accounts"
-);
+/**
+ * Forkmain:
+ * The project will stored according `~/Forkmain/<app-name>/<service-name>`
+ * Account will stored in `~/Forkmain/.account`
+ */
+export const FORKMAIN = "Forkmain";
+export const FORKMAIN_BASE_DIR = path.resolve(HOME_DIR, FORKMAIN);
+export const FORKMAIN_ACCOUNT_DIR = path.resolve(FORKMAIN_BASE_DIR, "./.account");
+export const FORKMAIN_BACKEND_URL = "https://forkmain.com/api/";
 
 export const NHCTL_DIR = path.resolve(NH_CONFIG_DIR, "nhctl");
 export const NH_BIN = path.resolve(NH_CONFIG_DIR, "bin");

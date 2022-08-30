@@ -71,7 +71,7 @@ class Git {
     this.host = host;
     this.args = args;
 
-    const [user, project] = this.parseGitUrl(gitUrl);
+    const [user, project] = this.parseGitUrl(gitUrl); 
     this.user = user;
     this.project = project;
 

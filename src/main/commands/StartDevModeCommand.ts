@@ -21,7 +21,7 @@ import {
   TMP_WORKLOAD,
   TMP_WORKLOAD_PATH,
   TMP_HEADER,
-  PLUGIN_CONFIG_PROJECTS_DIR,
+  FORKMAIN_BASE_DIR,
 } from "../constants";
 import host, { Host } from "../host";
 import * as path from "path";
@@ -37,6 +37,7 @@ import logger from "../utils/logger";
 import { getContainer } from "../utils/getContainer";
 import SyncServiceCommand from "./sync/SyncServiceCommand";
 import { getContainers } from "../ctl/nhctl";
+import state from "../state";
 
 export interface ControllerNodeApi {
   name: string;
@@ -330,7 +331,7 @@ export default class StartDevModeCommand implements ICommand {
     namespace: string,
     appName: string,
     workloadName: string,
-    wrokloadType: string,
+    workloadType: string,
     containerName: string
   ): Promise<string | undefined> {
     let destDir: string | undefined;
@@ -339,7 +340,7 @@ export default class StartDevModeCommand implements ICommand {
       namespace,
       appName,
       workloadName,
-      wrokloadType,
+      workloadType,
       containerName
     );
 
@@ -348,8 +349,9 @@ export default class StartDevModeCommand implements ICommand {
       return destDir;
     }
 
-    const baseDir = PLUGIN_CONFIG_PROJECTS_DIR;
-    destDir = path.resolve(baseDir, appName, workloadName);
+    // Use appName from URI
+    const application = state.getData("app");
+    destDir = path.resolve(FORKMAIN_BASE_DIR, application.appName, workloadName);
 
     // If destination dir already existed, use it directly.
     if (existsSync(destDir)) {
@@ -362,7 +364,7 @@ export default class StartDevModeCommand implements ICommand {
         namespace,
         appName,
         workloadName,
-        wrokloadType,
+        workloadType,
         containerName,
         "gitUrl",
         gitUrl

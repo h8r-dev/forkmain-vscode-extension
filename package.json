@@ -53,6 +53,11 @@
             ],
             "default": "on",
             "description": "%forkmain.nhctl.checkVersion%"
+          },
+          "forkmain.originalUrl": {
+            "type": "string",
+            "default": "https://forkmain.com",
+            "description": "%forkmain.originUrl%"
           }
         }
       }
@@ -116,188 +121,188 @@
       "view/item/context": [
         {
           "command": "Forkmain.openProject",
-          "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "developing@1"
         },
         {
           "command": "Forkmain.run",
-          "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "developing@3"
         },
         {
           "command": "Forkmain.debug",
-          "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "developing@2"
         },
         {
           "command": "Forkmain.showApp",
-          "when": "viewItem =~ /^devspace-server/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^devspace-server/i",
           "group": "inline@0"
         },
         {
           "command": "Forkmain.installAppSource",
-          "when": "viewItem =~ /^devspace-local/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^devspace-local/i",
           "group": "inline@0"
         },
         {
           "command": "Forkmain.uninstallApp",
-          "when": "viewItem =~ /^application-nodefault-installed/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^application-nodefault-installed/i",
           "group": "inline@0"
         },
         {
           "command": "Forkmain.cleanPvc",
-          "when": "viewItem =~ /^application-(.*)-installed/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^application-(.*)-installed/i",
           "group": "application@1"
         },
         {
           "command": "Forkmain.applyKubernetesObject",
-          "when": "viewItem =~ /^application-(.*)-installed/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^application-(.*)-installed/i",
           "group": "application@2"
         },
         {
           "command": "Forkmain.upgradeApp",
-          "when": "viewItem =~ /^application-nodefault-installed[-\\w]*-server$/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^application-nodefault-installed[-\\w]*-server$/i",
           "group": "application@3"
         },
         {
           "command": "Forkmain.cleanPvc",
-          "when": "viewItem =~ /^devspace/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^devspace/i",
           "group": "navigation"
         },
         {
           "command": "Forkmain.cleanPvc",
-          "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "2"
         },
         {
           "command": "Forkmain.startDevMode",
-          "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!(developing|starting|develop_starting|vpn_))/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!(developing|starting|develop_starting|vpn_))/i",
           "group": "inline@0"
         },
         {
           "command": "Forkmain.startCopyDevMode",
-          "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!(developing-duplicate|developing-replace-self|starting|vpn_healthy|vpn_unhealthy))/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!(developing-duplicate|developing-replace-self|starting|vpn_healthy|vpn_unhealthy))/i",
           "group": "navigation"
         },
         {
           "command": "Forkmain.startMeshDevMode",
-          "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!(developing-duplicate|developing-replace-self|starting|vpn_healthy|vpn_unhealthy))/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!(developing-duplicate|developing-replace-self|starting|vpn_healthy|vpn_unhealthy))/i",
           "group": "navigation"
         },
         {
           "command": "Forkmain.endDevMode",
-          "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(developing|develop_starting)/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(developing|develop_starting)/i",
           "group": "inline@0"
         },
         {
           "command": "Forkmain.editServiceConfig",
-          "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "inline@1"
         },
         {
           "command": "Forkmain.exec",
-          "when": "viewItem =~ /^workload-(deployment|statefulSet|daemonSet|pod-Running|daemonSet|cronjob|job|pod|crd-resources)-dev-(?!vpn_)/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^workload-(deployment|statefulSet|daemonSet|pod-Running|daemonSet|cronjob|job|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "3"
         },
         {
           "command": "Forkmain.copyTerminal",
-          "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|pod-Running|crd-resources)-dev-(?!vpn_)/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|pod-Running|crd-resources)-dev-(?!vpn_)/i",
           "group": "3"
         },
         {
           "command": "Forkmain.reset",
-          "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "2"
         },
         {
           "command": "Forkmain.resetDevspace",
-          "when": "viewItem =~ /^devspace-server/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^devspace-server/i",
           "group": "navigation"
         },
         {
           "command": "Forkmain.log",
-          "when": "viewItem =~ /^(viewer:|)workload-(deployment|statefulSet|daemonSet|job|cronJob|pod|crd-resources)-dev-(?!vpn_)/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^(viewer:|)workload-(deployment|statefulSet|daemonSet|job|cronJob|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "1"
         },
         {
           "command": "Forkmain.editManifest",
-          "when": "viewItem =~ /^workload-(deployment|statefulSet|daemonSet|job|cronJob|pod|crd-resources)-dev-(?!vpn_).*(?<!duplicate-self)$/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^workload-(deployment|statefulSet|daemonSet|job|cronJob|pod|crd-resources)-dev-(?!vpn_).*(?<!duplicate-self)$/i",
           "title": "%editManifest%",
           "group": "1"
         },
         {
           "command": "Forkmain.portForward",
-          "when": "viewItem =~ /^(viewer:|)workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|pod-Running|crd-resources)-dev-(?!vpn_)/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^(viewer:|)workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|pod-Running|crd-resources)-dev-(?!vpn_)/i",
           "group": "1"
         },
         {
           "command": "Forkmain.portForward",
-          "when": "viewItem =~ /^(viewer:|)application-(.*)-installed/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^(viewer:|)application-(.*)-installed/i",
           "group": "navigation"
         },
         {
           "command": "Forkmain.associateLocalDirectory",
-          "when": "viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "0"
         },
         {
           "command": "Forkmain.deleteKubernetesObject",
-          "when": "viewItem =~ /^(workload|network|configuration|storage)-\\w+(-\\w+)?(-(complete|running|starting|unknown))?$/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^(workload|network|configuration|storage)-\\w+(-\\w+)?(-(complete|running|starting|unknown))?$/i",
           "group": "1"
         },
         {
           "command": "Forkmain.viewKubeConfig",
-          "when": "viewItem =~ /^kubeconfig/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^kubeconfig/i",
           "group": "navigation"
         },
         {
           "command": "Forkmain.signout",
-          "when": "viewItem =~ /^kubeconfig-server$/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^kubeconfig-server$/i",
           "group": "navigation"
         },
         {
           "command": "Forkmain.deleteKubeConfig",
-          "when": "viewItem =~ /^kubeconfig-local/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^kubeconfig-local/i",
           "group": "navigation"
         },
         {
           "command": "Forkmain.rename",
-          "when": "viewItem =~ /^kubeconfig-local/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^kubeconfig-local/i",
           "group": "navigation"
         },
         {
           "command": "Forkmain.switchAssociate",
-          "when": "viewItem =~ /^syncAssociate-other/i"
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^syncAssociate-other/i"
         },
         {
           "command": "Forkmain.disassociateAssociate",
-          "when": "viewItem =~ /^syncAssociate-(.*)disassociate/i"
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^syncAssociate-(.*)disassociate/i"
         },
         {
           "command": "Forkmain.reconnectSync",
-          "when": "viewItem =~ /^syncAssociate-(.*)resume/i"
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^syncAssociate-(.*)resume/i"
         },
         {
           "command": "Forkmain.overrideSync",
-          "when": "viewItem =~ /^syncAssociate-(.*)override/i"
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^syncAssociate-(.*)override/i"
         },
         {
           "command": "Forkmain.openSyncDashboard",
-          "when": "viewItem =~ /^syncAssociate-(.*)override/i"
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^syncAssociate-(.*)override/i"
         },
         {
           "command": "Forkmain.startProxyMode",
-          "when": "viewItem =~ /(^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!(developing|starting|develop_starting|vpn_)))|(^network-service-(?!vpn))/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /(^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!(developing|starting|develop_starting|vpn_)))|(^network-service-(?!vpn))/i",
           "group": "navigation"
         },
         {
           "command": "Forkmain.resumeProxyMode",
-          "when": "viewItem =~ /^(workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)|network-service)(.*)vpn_unhealthy/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^(workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)|network-service)(.*)vpn_unhealthy/i",
           "group": "navigation"
         },
         {
           "command": "Forkmain.endProxyMode",
-          "when": "viewItem =~ /^(workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)|network-service)(.*)vpn/i",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^(workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)|network-service)(.*)vpn/i",
           "group": "inline@0"
         }
       ]
