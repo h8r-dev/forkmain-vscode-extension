@@ -3,7 +3,7 @@
  */
 
 import * as path from "path";
-
+import { writeFileSync } from "fs";
 import { merge } from "lodash-es";
 
 import logger from "../utils/logger";
@@ -15,8 +15,7 @@ import {
   getFilesByDir,
 } from "../utils/fileUtil";
 import host from "../host";
-import { PLUGIN_CONFIG_ACCOUNT_DIR } from "../constants";
-import { writeFileSync } from "fs";
+import { FORKMAIN_ACCOUNT_DIR } from "../constants";
 
 interface AccountDetails {
   email: string;
@@ -45,7 +44,7 @@ function recordError(errMsg: string): void {
 
 function createUserAccountDir(email: string): string {
   try {
-    const accountDir = path.resolve(PLUGIN_CONFIG_ACCOUNT_DIR);
+    const accountDir = path.resolve(FORKMAIN_ACCOUNT_DIR);
     mkdir(accountDir);
 
     const userAccountDir = path.resolve(accountDir, email);
@@ -115,7 +114,7 @@ export async function storeApplication(data: ApplicationDetail): Promise<void> {
 // Get stored application data.
 export async function getStoredApplicationData(): Promise<any> {
   try {
-    const accountDir = path.resolve(PLUGIN_CONFIG_ACCOUNT_DIR);
+    const accountDir = path.resolve(FORKMAIN_ACCOUNT_DIR);
     if (!isExistSync(accountDir)) {
       return null;
     }
@@ -142,7 +141,7 @@ export async function getStoredApplicationData(): Promise<any> {
 // FIXME.
 export async function getStoredToken(): Promise<string> {
   try {
-    const accountDir = path.resolve(PLUGIN_CONFIG_ACCOUNT_DIR);
+    const accountDir = path.resolve(FORKMAIN_ACCOUNT_DIR);
     if (!isExistSync(accountDir)) {
       return "";
     }
