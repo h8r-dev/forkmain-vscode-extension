@@ -176,8 +176,8 @@ export default class StartDevModeCommand implements ICommand {
         image as string
       );
 
-      host.log('[destDir]' + destDir, true);
-      host.log('[getCurrentRootPath]' + host.getCurrentRootPath(), true);
+      host.log("[destDir]" + destDir, true);
+      host.log("[getCurrentRootPath]" + host.getCurrentRootPath(), true);
 
       if (
         destDir === true ||
@@ -351,7 +351,11 @@ export default class StartDevModeCommand implements ICommand {
 
     // Use appName from URI
     const application = state.getData("app");
-    destDir = path.resolve(FORKMAIN_BASE_DIR, application.appName, workloadName);
+    destDir = path.resolve(
+      FORKMAIN_BASE_DIR,
+      application.appName,
+      workloadName
+    );
 
     // If destination dir already existed, use it directly.
     if (existsSync(destDir)) {
@@ -476,7 +480,7 @@ export default class StartDevModeCommand implements ICommand {
     }
 
     if (destDir && destDir !== true) {
-      if(host.isWindow) {
+      if (host.isWindow) {
         // Make drive letter lowercase to equal `vscode.workspace.workspaceFolders`
         // Issue: https://github.com/microsoft/vscode/issues/116232
         const driveLetterRegExp = /^[A-Za-z]:/;
