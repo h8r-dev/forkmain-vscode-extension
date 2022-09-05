@@ -130,6 +130,12 @@
           "group": "developing@3"
         },
         {
+          "command": "Forkmain.open",
+          "when": "view =~ ForkmainK8STree && viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
+          "group": "developing@3"
+        },
+        
+        {
           "command": "Forkmain.debug",
           "when": "view =~ ForkmainK8STree && viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "developing@2"
@@ -345,6 +351,10 @@
       {
         "command": "Forkmain.run",
         "title": "Remote Run"
+      },
+      {
+        "command": "Forkmain.open",
+        "title": "Local Run"
       },
       {
         "command": "Forkmain.ClustersView",
