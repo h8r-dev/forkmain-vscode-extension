@@ -621,7 +621,6 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && npm run ts-compile-check"
     }
   },
   "lint-staged": {
