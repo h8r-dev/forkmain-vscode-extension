@@ -8,6 +8,7 @@ export async function getKubeconfig(
   orgId: string,
   clusterId: string
 ): Promise<string> {
+  // baseURL = 'http://fm-public-test-5f4tmf.forkmain.cloud';
   const resp = await axios.get(`/api/orgs/${orgId}/clusters/${clusterId}`, {
     baseURL,
     timeout: 5000, // waits for 5 seconds.
