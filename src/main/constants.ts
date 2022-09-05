@@ -15,7 +15,6 @@ export const USER_CONFIG_FULLPATH = path.resolve(
   PLUGIN_CONFIG_DIR,
   "config.json"
 );
-  
 
 /**
  * Forkmain:
@@ -24,7 +23,10 @@ export const USER_CONFIG_FULLPATH = path.resolve(
  */
 export const FORKMAIN = "Forkmain";
 export const FORKMAIN_BASE_DIR = path.resolve(HOME_DIR, FORKMAIN);
-export const FORKMAIN_ACCOUNT_DIR = path.resolve(FORKMAIN_BASE_DIR, "./.account");
+export const FORKMAIN_ACCOUNT_DIR = path.resolve(
+  FORKMAIN_BASE_DIR,
+  "./.account"
+);
 export const FORKMAIN_BACKEND_URL = "https://forkmain.com/api/";
 
 export const NHCTL_DIR = path.resolve(NH_CONFIG_DIR, "nhctl");

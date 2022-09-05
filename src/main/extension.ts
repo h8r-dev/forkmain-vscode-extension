@@ -323,7 +323,7 @@ function bindEvent() {
 }
 
 function launchDevSpace() {
-	host.log('[launchDevSpace]', true);
+  host.log("[launchDevSpace]", true);
 
 	SyncServiceCommand.checkSync();
 
