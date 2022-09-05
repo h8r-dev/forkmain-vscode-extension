@@ -222,7 +222,7 @@ export default class AutoStartDevModeCommand implements ICommand {
 		return searchPath.reduce(async (parent, label) => {
 			const children = await (await parent)?.getChildren();
 
-			const child = children.find((item: any) => {
+			const child = children?.find((item: any) => {
 				if (item instanceof DevSpaceNode) {
 					return item.info.namespace === label.toLowerCase();
 				}

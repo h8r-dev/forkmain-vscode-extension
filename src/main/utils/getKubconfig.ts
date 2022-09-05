@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-import host from '../host';
+import host from "../host";
 
 export async function getKubeconfig(
 	baseURL: string,
@@ -8,7 +8,7 @@ export async function getKubeconfig(
 	orgId: string,
 	clusterId: string
 ): Promise<string> {
-	baseURL = 'http://vscode-plugin-forkmain-743lkf2p6.forkmain.cloud';
+	//baseURL = 'http://vscode-plugin-forkmain-743lkf2p6.forkmain.cloud';
 	const resp = await axios.get(
 		`/api/orgs/${orgId}/clusters/${clusterId}`,
 		{
@@ -23,10 +23,10 @@ export async function getKubeconfig(
 	if (resp.status !== 200) {
 		host.log(`Fetch kubeconfig failed!`, true);
 		host.showInformationMessage(`Fetch kubeconfig failed!`);
-		return '';
+		return "";
 	} else {
 		host.log(
-			'Fetch kubeconfig from forkmain backend api successfully!',
+			"Fetch kubeconfig from forkmain backend api successfully!",
 			true
 		);
 	}
