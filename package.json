@@ -1,6 +1,6 @@
 {
   "name": "forkmain",
-  "version": "0.2.5",
+  "version": "0.2.9",
   "displayName": "ForkMain",
   "description": "Makes developing with Kubernetes feel like on local. IDE tool for cloud-native development",
   "license": "Apache-2.0",
@@ -134,7 +134,6 @@
           "when": "view =~ ForkmainK8STree && viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
           "group": "developing@3"
         },
-        
         {
           "command": "Forkmain.debug",
           "when": "view =~ ForkmainK8STree && viewItem =~ /^workload-(deployment|statefulSet|job|daemonSet|cronjob|pod|crd-resources)-dev-(?!vpn_)/i",
@@ -620,8 +619,7 @@
     "prebuild:test": "node ./scripts/test.build.js"
   },
   "husky": {
-    "hooks": {
-    }
+    "hooks": {}
   },
   "lint-staged": {
     "src": [
