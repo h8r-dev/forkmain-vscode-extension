@@ -11,12 +11,19 @@ class Git {
   user: string;
   project: string;
   args: string[];
-
+  isGithub: boolean = true;
+  showContent: string = "Github";
+  url:string='';
   private parseGitUrl(gitUrl: string): string[] {
+    if (gitUrl.includes("gitlab")) {
+      this.isGithub = false;
+      this.showContent = "Gitlab";
+    }
     if (gitUrl.startsWith("https")) {
       // https protocol
       const [scheme, host] = gitUrl.split("://");
       const [_, user, project] = host.split("/");
+      this.url=_;
       return [user, project.replace(/\.git$/, "")];
     }
 
@@ -24,16 +31,20 @@ class Git {
       // Git protocol
       const [scheme, host] = gitUrl.split(":");
       const [user, project] = host.split("/");
+      this.url = scheme.split("@")[1];
       return [user, project.replace(/\.git$/, "")];
     }
   }
 
   private async cloneWithHttpsProtocol(username?: string, token?: string) {
     this.host.log("Trying Https Protocol...");
-
-    let gitURL = `https://github.com/${this.user}/${this.project}.git`;
+    let domain: string = "github";
+    if (!this.isGithub) {
+      domain = "gitlab";
+    }
+    let gitURL = `https://${this.url}/${this.user}/${this.project}.git`;
     if (username && token) {
-      gitURL = `https://${username}:${token}@github.com/${this.user}/${this.project}.git`;
+      gitURL = `https://${username}:${token}@${this.url}/${this.user}/${this.project}.git`;
     }
 
     const result = await this.execComandsByArgs(["clone", gitURL]).catch(
@@ -49,8 +60,12 @@ class Git {
 
   private async cloneWithGitProtocol() {
     this.host.log("Trying Git Protocol...");
+    let domain: string = "github";
+    if (!this.isGithub) {
+      domain = "gitlab";
+    }
 
-    const gitURL = `git@github.com:${this.user}/${this.project}.git`;
+    const gitURL = `git@${this.url}:${this.user}/${this.project}.git`;
 
     const result = await this.execComandsByArgs(["clone", gitURL]).catch(
       (err) => err
@@ -77,14 +92,14 @@ class Git {
 
     let cloneResult: boolean = false;
 
-    // Try https protocol
-    cloneResult = await this.cloneWithHttpsProtocol();
+    // Try Git protocol
+    cloneResult = await this.cloneWithGitProtocol();
     if (cloneResult) {
       return true;
     }
 
-    // Try Git protocol
-    cloneResult = await this.cloneWithGitProtocol();
+    // Try https protocol
+    cloneResult = await this.cloneWithHttpsProtocol();
     if (cloneResult) {
       return true;
     }
@@ -96,7 +111,7 @@ class Git {
     // Prompt window to input username && password, and use https protocol
     const username = await host.showInputBox({
       placeHolder: "Username",
-      prompt: "Please input your username of GitHub",
+      prompt: `Please input your username of ${this.showContent}`,
     });
 
     if (!username) {
@@ -105,8 +120,8 @@ class Git {
     }
 
     const token = await host.showInputBox({
-      placeHolder: "GitHub Personal Access Token",
-      prompt: "Please input your GitHub personal access token",
+      placeHolder: `${this.showContent} Personal Access Token`,
+      prompt: `Please input your ${this.showContent} personal access token`,
       password: true,
     });
 

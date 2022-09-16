@@ -23,7 +23,6 @@ import state from "../state";
 import { NOCALHOST } from "../constants";
 import { checkKubeconfig, IKubeconfig } from "../ctl/nhctl";
 import logger from "../utils/logger";
-
 // Forkmain Account related
 import { getStoredToken, getStoredApplicationData } from "../account";
 import { BaseNocalhostNode } from "../nodes/types/nodeType";
@@ -111,7 +110,14 @@ export class HomeWebViewProvider implements vscode.WebviewViewProvider {
               return;
             }
             const userProfile = this.getUserProfile();
-            webviewView.webview.postMessage({ userProfile });
+            const app = await getStoredApplicationData();
+            const info = {
+              service: app["forkmain-dev"].applications[0].services[0].name,
+              env: app["forkmain-dev"].applications[0].services[0].env,
+              workLoad:
+                app["forkmain-dev"].applications[0].services[0].workloadType,
+            };
+            webviewView.webview.postMessage({ userProfile, info });
             break;
           }
           case "loginForkMain": {
