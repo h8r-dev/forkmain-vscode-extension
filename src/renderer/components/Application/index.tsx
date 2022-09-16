@@ -1,10 +1,11 @@
 /**
  * An Application created on ForkMain.
  */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { postMessage } from "../../utils/index";
 import Divider from "@material-ui/core/Divider";
-
+// @ts-ignore
+import state from "../../../main/state";
 interface ApplicationProps {
   app: any;
 }
@@ -44,7 +45,6 @@ const ApplicationComp: React.FC<ApplicationProps> = ({ app }) => {
       data: {},
     });
   }
-
   return (
     <div className="forkmain-app">
       <div style={{ display: "flex", paddingTop: 10, paddingBottom: 10 }}>
@@ -103,6 +103,46 @@ const ApplicationComp: React.FC<ApplicationProps> = ({ app }) => {
         >
           Port Forward
         </button>
+      </div>
+      <Divider />
+      <hr />
+      <div style={{ fontSize: "14px", marginTop: "5px" }}>
+        <div style={{ marginTop: "5px" }}>
+          <span
+            style={{
+              display: "inline-block",
+              width: "70px",
+              textAlign: "right",
+            }}
+          >
+            service
+          </span>{" "}
+          :&nbsp;&nbsp;{app?.service}
+        </div>
+        <div style={{ marginTop: "5px" }}>
+          <span
+            style={{
+              display: "inline-block",
+              width: "70px",
+              textAlign: "right",
+            }}
+          >
+            env
+          </span>{" "}
+          :&nbsp;&nbsp;{app?.env}
+        </div>
+        <div style={{ marginTop: "5px" }}>
+          <span
+            style={{
+              display: "inline-block",
+              width: "70px",
+              textAlign: "right",
+            }}
+          >
+            workLoad
+          </span>{" "}
+          :&nbsp;&nbsp;{app?.workLoad}
+        </div>
       </div>
     </div>
   );

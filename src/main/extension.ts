@@ -1,4 +1,3 @@
-import { getState } from "./../renderer/utils/index";
 import * as vscode from "vscode";
 import * as nls from "vscode-nls";
 
@@ -151,7 +150,6 @@ export async function activate(context: vscode.ExtensionContext) {
     };
 
     storeApplication(application);
-
     state.setData("app", application);
   };
 
